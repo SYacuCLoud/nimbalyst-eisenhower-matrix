@@ -1,6 +1,7 @@
 # Eisenhower Matrix (Nimbalyst 확장)
 
-[eisenhower-matrix-for-project-manager](https://github.com/SYacuCLoud/eisenhower-matrix-for-project-manager)(Obsidian dotpm용)를 Nimbalyst로 옮긴 확장입니다. dotpm 작업 노트 대신 **Nimbalyst 트래커 항목**(task, bug 등)을 긴급도와 중요도에 따라 2×2 매트릭스로 정리하고, 카드를 다른 분면으로 옮기면 마감일과 우선순위를 갱신합니다.
+Nimbalyst 트래커 항목(task, bug 등)을 긴급도와 중요도에 따라 2×2 매트릭스로 정리하고, 카드를 다른 분면으로 옮기면 마감일과 우선순위를 갱신하는 확장입니다.
+[eisenhower-matrix-for-project-manager](https://github.com/SYacuCLoud/eisenhower-matrix-for-project-manager)(Obsidian dotpm용)를 Nimbalyst로 옮겼습니다.
 
 ## 주요 기능
 
@@ -9,6 +10,7 @@
 - 쓰기 직전 최신 값을 다시 읽어 동시 수정 충돌 검사, 마지막 변경 되돌리기
 - 마감일 빠른 조정(오늘 · 내일 · +1일 · +1주 · 다음 월요일 · 지우기)
 - 제목·키·태그·담당자 검색, 타입 필터, 완료·보관 표시, 정렬, 카드 밀도(간결·기본·상세)
+- 툴바의 **에이전트 작업** 토글: AI 에이전트가 만든 트래커 항목(`data.createdByAgent`)을 숨기거나 보이기
 - `Blocked` 상태, 미완료 선행 작업(`dependsOn`), 미래 시작일 작업을 "지금 실행할 수 없음" 영역으로 분리
 - 긴급 작업의 `기한 초과` · `오늘 마감` · `마감 임박` 표시, 오래 수정되지 않은 중요 작업 표시
 - 이전 확인 이후 분면·긴급도·실행 상태가 바뀐 작업 알림
@@ -16,6 +18,22 @@
 - 분면 머리의 편집 버튼으로 타입·우선순위·마감일을 정해서 만들기
 - 트래커 화면, AI 에이전트, 팀 동기화로 추가·수정된 항목이 매트릭스에 실시간 반영
 - 카드 클릭 시 Nimbalyst 트래커 항목 열기, 거터 배지에 즉시 실행 작업 수 표시
+
+## 설치
+
+Windows 기준입니다. Node.js가 필요합니다.
+
+1. 저장소를 받고 빌드합니다.
+   ```bash
+   git clone https://github.com/SYacuCLoud/nimbalyst-eisenhower-matrix.git
+   cd nimbalyst-eisenhower-matrix
+   npm install
+   npm run build
+   ```
+2. `manifest.json`과 `dist/`를 `%APPDATA%\@nimbalyst\electron\extensions\com.syacucloud.eisenhower-matrix\`에 복사합니다.
+3. Nimbalyst를 다시 시작합니다.
+
+Nimbalyst **Settings > Advanced > Extension Dev Tools**를 켰다면 2~3 대신 `extension_build` / `extension_install`을 써도 됩니다.
 
 ## 분류 규칙
 
@@ -29,15 +47,13 @@
 
 ## 연동 방식과 제한 사항
 
-Nimbalyst 확장 SDK는 트래커 **읽기**(`host.data.query`)만 공개합니다. 수정·생성·삭제·항목 열기에는 Nimbalyst 트래커 UI가 쓰는 렌더러 IPC(`window.electronAPI`의 `document-service:*` 채널, `nimbalyst:navigate-tracker-item` 이벤트)를 사용합니다. 원본 플러그인이 dotpm 내부 경로를 쓰는 것과 같은 방식이라 Nimbalyst 업데이트로 바뀔 수 있습니다. 호출 전에 존재 여부를 확인하고, 없으면 DB 읽기로 바꿔 읽기 전용으로 표시합니다. 현재 상태는 매트릭스 설정의 **연동 상태**에서 확인할 수 있습니다.
+Nimbalyst 확장 SDK는 트래커 **읽기**(`host.data.query`)만 공개합니다. 수정·생성·삭제·항목 열기에는 Nimbalyst 트래커 UI가 쓰는 렌더러 내부 IPC(`window.electronAPI`의 `document-service:*` 채널, `nimbalyst:navigate-tracker-item` 이벤트)를 사용합니다. 공개 API가 아니므로 Nimbalyst 업데이트로 바뀔 수 있습니다. 호출 전에 존재 여부를 확인하고, 없으면 DB 읽기로 바꿔 읽기 전용으로 표시합니다. 현재 상태는 매트릭스 설정의 **연동 상태**에서 확인할 수 있습니다.
 
-## 빌드와 설치
+## 개발
 
 ```bash
-npm install
 npm test
 npm run check:types
-npm run build
 ```
 
-`manifest.json`과 `dist/`를 `%APPDATA%\@nimbalyst\electron\extensions\com.syacucloud.eisenhower-matrix\`에 복사한 뒤 Nimbalyst를 다시 시작합니다. (Extension Dev Tools의 `extension_reload`를 쓸 수 있다면 그것으로도 됩니다.)
+Nimbalyst 공식 확장이 아닌 개인 프로젝트입니다.
