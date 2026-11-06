@@ -1,0 +1,25 @@
+{
+  "id": "com.syacucloud.eisenhower-matrix",
+  "name": "Eisenhower Matrix",
+  "version": "0.1.0",
+  "description": "Nimbalyst 트래커 항목을 긴급/중요 4사분면에서 정리하고, 카드를 옮겨 마감일과 우선순위를 갱신합니다.",
+  "author": "SYacuCLoud",
+  "main": "dist/index.js",
+  "styles": "dist/index.css",
+  "apiVersion": "1.0.0",
+  "permissions": {
+    "catalog": ["nimbalyst-database-read"]
+  },
+  "contributions": {
+    "panels": [
+      {
+        "id": "matrix",
+        "title": "아이젠하워 매트릭스",
+        "icon": "grid_view",
+        "placement": "fullscreen",
+        "order": 60,
+        "tooltip": "트래커 항목을 긴급·중요 4사분면으로 정리하고 드래그해서 마감일·우선순위를 바꿉니다."
+      }
+    ]
+  }
+}

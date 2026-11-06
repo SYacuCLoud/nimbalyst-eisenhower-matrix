@@ -1,0 +1,772 @@
+.eis-root {
+  --eis-do: var(--nim-error, #ef4444);
+  --eis-plan: var(--nim-primary, #3b82f6);
+  --eis-delegate: var(--nim-warning, #f59e0b);
+  --eis-drop: var(--nim-text-faint, #9ca3af);
+  --eis-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  overflow: auto;
+  padding: 12px 16px 16px;
+  box-sizing: border-box;
+  background: var(--nim-bg);
+  color: var(--nim-text);
+  font-size: 13px;
+}
+
+.eis-root *,
+.eis-root *::before,
+.eis-root *::after {
+  box-sizing: border-box;
+}
+
+.eis-icon {
+  font-size: 16px;
+  line-height: 1;
+  vertical-align: -3px;
+}
+
+.eis-spacer {
+  flex: 1;
+}
+
+.eis-muted {
+  color: var(--nim-text-muted);
+}
+
+/* ── 툴바 ───────────────────────────────────────────── */
+.eis-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.eis-title {
+  margin: 0 8px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.eis-root input,
+.eis-root select {
+  font: inherit;
+  color: var(--nim-text);
+  background: var(--nim-bg-secondary);
+  border: 1px solid var(--nim-border);
+  border-radius: 6px;
+  padding: 4px 8px;
+  min-height: 28px;
+}
+
+.eis-root input:focus,
+.eis-root select:focus {
+  outline: none;
+  border-color: var(--nim-border-focus, var(--nim-primary));
+}
+
+.eis-root input[type='checkbox'] {
+  min-height: 0;
+  padding: 0;
+  accent-color: var(--nim-primary);
+}
+
+.eis-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eis-search .eis-icon {
+  position: absolute;
+  left: 8px;
+  color: var(--nim-text-muted);
+  pointer-events: none;
+}
+
+.eis-search input {
+  padding-left: 28px;
+  width: 240px;
+}
+
+.eis-inline,
+.eis-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--nim-text-muted);
+  white-space: nowrap;
+}
+
+.eis-segment {
+  display: inline-flex;
+  border: 1px solid var(--nim-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.eis-segment button {
+  font: inherit;
+  border: 0;
+  background: var(--nim-bg-secondary);
+  color: var(--nim-text-muted);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.eis-segment button + button {
+  border-left: 1px solid var(--nim-border);
+}
+
+.eis-segment button.is-active {
+  background: var(--nim-bg-selected, var(--nim-bg-hover));
+  color: var(--nim-text);
+}
+
+.eis-btn {
+  font: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  min-height: 28px;
+  border-radius: 6px;
+  border: 1px solid var(--nim-border);
+  background: var(--nim-bg-secondary);
+  color: var(--nim-text);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.eis-btn:hover:not(:disabled) {
+  background: var(--nim-bg-hover);
+}
+
+.eis-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.eis-btn.is-primary {
+  background: var(--nim-primary);
+  border-color: var(--nim-primary);
+  color: var(--nim-on-primary, #fff);
+}
+
+.eis-btn.is-primary:hover:not(:disabled) {
+  background: var(--nim-primary-hover, var(--nim-primary));
+}
+
+.eis-btn.is-danger {
+  background: var(--nim-error);
+  border-color: var(--nim-error);
+  color: #fff;
+}
+
+.eis-btn.is-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--nim-link, var(--nim-primary));
+}
+
+.eis-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--nim-text-muted);
+  cursor: pointer;
+}
+
+.eis-icon-btn:hover:not(:disabled) {
+  background: var(--nim-bg-hover);
+  color: var(--nim-text);
+}
+
+.eis-icon-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.eis-icon-btn .eis-icon {
+  font-size: 18px;
+  vertical-align: 0;
+}
+
+.eis-link {
+  font: inherit;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--nim-link, var(--nim-primary));
+  cursor: pointer;
+}
+
+/* ── 배너 ───────────────────────────────────────────── */
+.eis-banner {
+  padding: 8px 12px;
+  border-radius: var(--eis-radius);
+  background: var(--nim-bg-secondary);
+  border: 1px solid var(--nim-border);
+  color: var(--nim-text-muted);
+}
+
+.eis-banner.is-error {
+  border-color: var(--nim-error);
+  color: var(--nim-error);
+}
+
+.eis-briefing {
+  padding: 8px 12px;
+  border-radius: var(--eis-radius);
+  border: 1px solid var(--nim-info, var(--nim-primary));
+  background: var(--nim-bg-secondary);
+}
+
+.eis-briefing-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.eis-briefing ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eis-briefing li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.eis-empty-all {
+  padding: 12px;
+  text-align: center;
+  color: var(--nim-text-muted);
+}
+
+/* ── 매트릭스 ───────────────────────────────────────── */
+.eis-matrix {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto minmax(220px, 1fr) minmax(220px, 1fr);
+  gap: 10px;
+  /* 기준 높이 0: 카드 수와 무관하게 남은 공간으로 높이가 정해져 1fr 행이 같다 */
+  flex: 1 0 0;
+  min-height: 480px;
+}
+
+.eis-axis {
+  color: var(--nim-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eis-axis-row span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.eis-quadrant,
+.eis-unavailable {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--nim-border);
+  border-top: 3px solid var(--eis-accent, var(--nim-border));
+  border-radius: var(--eis-radius);
+  background: var(--nim-bg-secondary);
+  transition: border-color 0.12s, box-shadow 0.12s, background 0.12s;
+}
+
+.eis-q-do {
+  --eis-accent: var(--eis-do);
+}
+
+.eis-q-plan {
+  --eis-accent: var(--eis-plan);
+}
+
+.eis-q-delegate {
+  --eis-accent: var(--eis-delegate);
+}
+
+.eis-q-drop {
+  --eis-accent: var(--eis-drop);
+}
+
+.eis-quadrant.is-collapsed {
+  min-height: 0;
+  align-self: start;
+}
+
+.is-dragging .eis-quadrant {
+  border-style: dashed;
+  border-top-style: solid;
+}
+
+.eis-quadrant.is-drop {
+  border-color: var(--eis-accent);
+  border-style: solid;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--eis-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--eis-accent) 6%, var(--nim-bg-secondary));
+}
+
+.eis-quadrant-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 8px 6px;
+}
+
+.eis-quadrant-titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.eis-quadrant-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.eis-quadrant-title {
+  font-size: 11px;
+  color: var(--nim-text-muted);
+}
+
+.eis-count {
+  min-width: 22px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 12px;
+  background: var(--nim-bg-tertiary);
+  color: var(--nim-text-muted);
+}
+
+.eis-quadrant-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 60px;
+}
+
+.eis-quickadd {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 8px 8px;
+  padding: 0 8px;
+  border-radius: 6px;
+  border: 1px dashed var(--nim-border);
+  color: var(--nim-text-muted);
+}
+
+.eis-quickadd:focus-within {
+  border-style: solid;
+  border-color: var(--eis-accent);
+  background: var(--nim-bg);
+}
+
+.eis-root .eis-quickadd input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 6px 0;
+}
+
+.eis-unavailable {
+  --eis-accent: var(--nim-text-faint);
+  flex: 0 0 auto;
+}
+
+.eis-unavailable-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 6px;
+  padding: 0 8px 8px;
+}
+
+.eis-empty,
+.eis-more {
+  padding: 10px 4px;
+  color: var(--nim-text-faint, var(--nim-text-muted));
+  text-align: center;
+  font-size: 12px;
+}
+
+/* ── 카드 ───────────────────────────────────────────── */
+.eis-card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--nim-border);
+  background: var(--nim-bg);
+  cursor: pointer;
+  user-select: none;
+}
+
+.eis-card:hover {
+  border-color: var(--nim-text-faint, var(--nim-border));
+  background: var(--nim-bg-hover);
+}
+
+.eis-card:focus-visible {
+  outline: 2px solid var(--nim-border-focus, var(--nim-primary));
+  outline-offset: 1px;
+}
+
+.eis-card.is-draggable {
+  cursor: grab;
+}
+
+.eis-card.is-done .eis-card-title {
+  text-decoration: line-through;
+  color: var(--nim-text-muted);
+}
+
+.eis-density-compact {
+  padding: 5px 8px;
+  gap: 3px;
+}
+
+.eis-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.eis-type {
+  flex: none;
+  color: var(--nim-text-muted);
+}
+
+.eis-card-title {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+.eis-density-compact .eis-card-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eis-key {
+  flex: none;
+  font-size: 11px;
+  color: var(--nim-text-faint, var(--nim-text-muted));
+  font-family: var(--nim-font-mono, ui-monospace, monospace);
+}
+
+.eis-card-meta,
+.eis-card-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.eis-card-detail {
+  font-size: 11px;
+  color: var(--nim-text-muted);
+  gap: 8px;
+}
+
+.eis-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 18px;
+  white-space: nowrap;
+  background: var(--nim-bg-tertiary);
+  color: var(--nim-text-muted);
+}
+
+.eis-chip .eis-icon {
+  font-size: 13px;
+  vertical-align: 0;
+}
+
+.eis-chip.eis-q-do,
+.eis-chip.eis-q-plan,
+.eis-chip.eis-q-delegate,
+.eis-chip.eis-q-drop {
+  color: var(--eis-accent);
+  background: color-mix(in srgb, var(--eis-accent) 12%, transparent);
+}
+
+.eis-tone-overdue {
+  color: var(--nim-error);
+  background: color-mix(in srgb, var(--nim-error) 12%, transparent);
+}
+
+.eis-tone-today {
+  color: var(--nim-warning);
+  background: color-mix(in srgb, var(--nim-warning) 14%, transparent);
+}
+
+.eis-tone-soon {
+  color: var(--nim-warning);
+}
+
+.eis-tone-blocked,
+.eis-tone-neglected {
+  color: var(--nim-purple, var(--nim-text-muted));
+  background: color-mix(in srgb, var(--nim-purple, #7c3aed) 12%, transparent);
+}
+
+.eis-tone-ok {
+  color: var(--nim-success);
+  background: color-mix(in srgb, var(--nim-success) 12%, transparent);
+}
+
+.eis-priority-0 {
+  color: var(--nim-error);
+}
+
+.eis-priority-1 {
+  color: var(--nim-warning);
+}
+
+/* ── 메뉴 ───────────────────────────────────────────── */
+.eis-menu {
+  position: fixed;
+  z-index: 1000;
+  min-width: 220px;
+  padding: 4px;
+  border-radius: var(--eis-radius);
+  border: 1px solid var(--nim-border);
+  background: var(--nim-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.eis-menu-label {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--nim-text-muted);
+}
+
+.eis-menu-item {
+  font: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: var(--nim-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.eis-menu-item:hover:not(:disabled) {
+  background: var(--nim-bg-hover);
+}
+
+.eis-menu-item:disabled {
+  color: var(--nim-text-faint, var(--nim-text-muted));
+  cursor: default;
+}
+
+.eis-menu-item.is-danger {
+  color: var(--nim-error);
+}
+
+.eis-menu-sep {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--nim-border);
+}
+
+/* ── 모달 ───────────────────────────────────────────── */
+.eis-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.eis-modal {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid var(--nim-border);
+  background: var(--nim-bg);
+  color: var(--nim-text);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.28);
+}
+
+.eis-modal-title {
+  margin: 0;
+  padding: 14px 16px 0;
+  font-size: 15px;
+}
+
+.eis-modal-body {
+  padding: 8px 16px;
+}
+
+.eis-modal-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px 14px;
+}
+
+.eis-diff {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0;
+}
+
+.eis-diff th,
+.eis-diff td {
+  text-align: left;
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--nim-border);
+}
+
+.eis-diff th {
+  font-weight: 500;
+  color: var(--nim-text-muted);
+}
+
+.eis-diff-before {
+  color: var(--nim-text-muted);
+  text-decoration: line-through;
+}
+
+.eis-diff-after {
+  font-weight: 600;
+}
+
+.eis-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.eis-form label {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  gap: 8px;
+}
+
+.eis-form label > span {
+  color: var(--nim-text-muted);
+}
+
+/* ── 토스트 ─────────────────────────────────────────── */
+.eis-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 420px;
+  padding: 8px 12px;
+  border-radius: var(--eis-radius);
+  border: 1px solid var(--nim-border);
+  background: var(--nim-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.eis-toast.is-error {
+  border-color: var(--nim-error);
+  color: var(--nim-error);
+}
+
+/* ── 설정 ───────────────────────────────────────────── */
+.eis-settings {
+  max-width: 720px;
+}
+
+.eis-settings-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eis-settings-head h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.eis-settings h3 {
+  margin: 20px 0 6px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--nim-text-muted);
+}
+
+.eis-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--nim-border);
+}
+
+.eis-setting-control input[type='number'] {
+  width: 80px;
+}
+
+/* ── 반응형 ─────────────────────────────────────────── */
+@media (max-width: 760px) {
+  .eis-matrix {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+  }
+
+  .eis-axis {
+    display: none;
+  }
+
+  .eis-search input {
+    width: 160px;
+  }
+}

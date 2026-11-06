@@ -1,0 +1,21 @@
+{
+  "name": "com.syacucloud.eisenhower-matrix",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "check:types": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@nimbalyst/extension-sdk": "^0.7.1",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.7.2",
+    "vite": "^7.1.12",
+    "vitest": "^4.1.10"
+  }
+}
