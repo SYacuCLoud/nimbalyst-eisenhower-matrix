@@ -290,7 +290,8 @@ export async function listTasks(host: PanelHost, schema: TrackerSchemaInfo): Pro
   const fieldsOf = fieldsResolver(schema)
   const api = electronApi()
   if (api) {
-    const raw = await api.invoke('document-service:tracker-items-list')
+    // Nimbalyst 는 창 하나에 여러 프로젝트가 열릴 수 있어 어느 프로젝트의 항목인지 이름을 받아야 한다.
+    const raw = await api.invoke('document-service:tracker-items-list', host.workspacePath)
     if (Array.isArray(raw)) {
       return (raw as RawItem[])
         .filter((r) => r && typeof r.id === 'string' && !r.deleted)
